@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>josuu chatbot</title>
+  <link rel="stylesheet" href="Chatbot css.css">
+  <link rel="icon" type="image/png" href="icons/chatcon">
+  <style>
+    /* Add your CSS styles here */
+  </style>
+</head>
+<body>
+  <div class="messaging-app">
+    <div class="sidebar">
+      <div class="profile">
+        <img src="p.img/saice.jpg" alt="Profile Picture">
+        <h3>saicebot</h3>
+        <p>@chatbot89</p>
+      </div>
+
+      <div class="contacts">
+        <h2>Chats</h2>
+        <hr>
+        <ul>
+          <button>
+            <li>joyce@789</li>
+          </button>
+          <button>
+            <li>frank@247</li>
+          </button>
+          <button>
+            <li>sam smack@43</li>
+          </button>
+          <button>
+            <li>jane@456</li>
+          </button>
+          <button>
+            <li>fryman14</li>
+          </button>
+        </ul>
+      </div>
+    </div>
+    <div class="chat">
+      <div class="chat-header">
+        <h2>Chat with bot🤖🤖</h2>
+        <a href="josuu2.html">
+        <button>Edit Profile</button>
+        </a>  
+      </div>
+      <div class="messages">
+        <div class="message received">
+          <img src="p.img/Dad.jpg" alt="Friend Picture">
+          <div class="message-content">Hi there!</div>
+        </div>
+        <div class="message sent">
+          <div class="message-content">Hello!</div>
+        </div>
+        <div class="message received">
+          <img src="p.img/Dad.jpg" alt="Friend Picture">
+          <div class="message-content">How are you?</div>
+        </div>
+        <div class="message sent">
+          <div class="message-content">I'm good, thanks!</div>
+        </div>
+        <!-- Add a message for the lyrics -->
+        <div class="message received">
+          <img src="p.img/chatcon.png" alt="Chatbot Picture">
+          <div class="message-content">
+            <pre>
+              let's talk 
+            </pre>
+              
+          </div>
+        </div>
+      </div>
+      <textarea id="user-input" placeholder="Type your message here..."></textarea>
+      <button id="send-btn">Send</button>
+
+      <!-- Video and Audio Elements -->
+      <video id="video-player" controls style="display: none;">
+        <source src="video.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+      <audio id="audio-player" controls style="display: none;">
+        <source src="audio.mp3" type="audio/mpeg">
+        Your browser does not support the audio tag.
+      </audio>
+    </div>
+  </div>
+
+  <script>
+    const userInput = document.getElementById('user-input');
+    const sendButton = document.getElementById('send-btn');
+    const story = 'story'; // Define the 'story' variable
+
+    sendButton.addEventListener('click', () => {
+      const messageContent = userInput.value;
+      appendMessage('sent', messageContent);
+      userInput.value = '';
+
+      // Simulate chatbot response
+      setTimeout(() => {
+        const botResponse = generateBotResponse(messageContent);
+        appendMessage('received', botResponse, 'Bot');
+      }, 1000);
+    });
+
+    function appendMessage(type, content, sender) {
+      const messagesContainer = document.querySelector('.messages');
+      const message = document.createElement('div');
+      message.classList.add('message', type);
+
+      if (type === 'received') {
+        message.innerHTML = `
+          <img src="p.img/chatcon.png" alt="Profile Picture">
+          <div class="message-content">
+            <strong>${sender}:</strong> ${content}
+          </div>`;
+      } else {
+        message.innerHTML = `
+          <div class="message-content">${content}</div>`;
+      }
+
+      messagesContainer.appendChild(message);
+    }
+      function generateBotResponse(message) {
+          // Add logic to generate chatbot response based on user input
+          if (message.toLowerCase().includes('name')) {
+            return "My name is Chatbot i was created by saice but most people call him Atkins.";
+          } else if (message.toLowerCase().includes('joke')) {
+            return "Why don't scientists trust atoms? Because they make up everything!";
+          } else if (message.toLowerCase().includes('poem')) {
+            return "Roses are red, violets are blue. I'm a chatbot, here to talk to you!";
+          } else if (message.toLowerCase().includes('hi', 'hello', 'hey')) {
+            return "How may I serve you, my master? Would you like a joke or a poem to make your day better?";
+          } else if (message.toLowerCase().includes('song')) {
+            return "Sorry is all that you can't say. Years gone by and still words don't come easily like sorry, like sorry! Forgive me is all that you can't say. Years gone by and still words don't come easily like forgive me, forgive me.";
+          } else if (message.toLowerCase().includes(story)) {
+            return "I'm a chatbot, here to tell you a story. Okay, remember a time you found the love of your life. But I don't know who it is, but I'm sure your heart is saying that special name. The end.";
+          } else if (message.toLowerCase().includes("video")) {
+            // Display video
+            const videoPlayer = document.getElementById('video-player');
+            videoPlayer.style.display = 'block';
+            return "Here's a video for you.";
+          } else if (message.toLowerCase().includes('music')) {
+            // Play audio
+            const audioPlayer = document.getElementById('audio-player');
+            audioPlayer.style.display = 'block';
+            return "Here's some audio for you.";
+          } else if (message.toLowerCase().includes('okay')){
+            return "👍👍😃😄";
+          }else {
+            return "I'm sorry, I didn't understand that. Please ask me something else.";
+          }
+        }
+      </script>
+    </body>
+    </html>
+
